@@ -1,0 +1,116 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block page_title %}
+Thêm lớp học phần
+{% endblock page_title %}
+
+{% block main_content %}
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Thêm lớp học phần</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" action="/add_classes_save" method="post">
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label>Nhóm</label>
+                          <input type="text" class="form-control" name="group" placeholder="Enter Group" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter name class" required>
+                        </div>
+
+                        <!-- <div class="form-group">
+                          <label>Session Start</label>
+                          <input type="month" class="form-control" name="sessionStart" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Session End</label>
+                          <input type="month" class="form-control" name="sessionEnd" required>
+                        </div> -->
+
+                        <div class="form-group">
+                          <label>Session</label>
+                          <input type="text" class="form-control" name="session" placeholder="Enter session" required>
+                        </div> 
+
+                        <div class="form-group">
+                            <label>Teacher</label>
+                            <select name="teacher" class="form-control">
+                              {% for gv in giangviens %}
+                                <option value="{{gv.id}}">{{gv.ten_gv}}</option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select name="subject" class="form-control">
+                              {% for mon in monhocs %}
+                                <option value="{{mon.id}}">{{mon.ten_mon}}</option>
+                              {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Department</label>
+                          <select name="department" class="form-control">
+                            {% for khoa in khoas %}
+                              <option value="{{khoa.id}}">{{khoa.tenkhoa}}</option>
+                            {% endfor %}
+                          </select>
+                      </div>
+
+                        <div class="form-group">
+                        {% if messages %}
+                          {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div class="alert alert-success">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card -->
+    
+                </div>
+
+              </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock main_content %}

@@ -1,0 +1,104 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block page_title %}
+Cập nhật thông tin giảng viên | ID: {{ teacher.admin.id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Thông tin giảng viên</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" action="/edit_teacher_save" method="post">
+                        {% csrf_token %}
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label>Email address</label>
+                          <input type="email" class="form-control" name="email" value="{{ teacher.admin.email }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username" value="{{ teacher.admin.username }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="first_name" value="{{ teacher.admin.first_name }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="last_name" value="{{ teacher.admin.last_name }}" required>
+                            <input type="hidden" name="teacherAdmin_id" value="{{ teacher.admin.id}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select name="department" class="form-control">
+                              {% for khoa in khoas %}
+                                <option value="{{khoa.id}}" {% if khoa.id == teacher.khoa_id %} selected {% endif %}>
+                                  {{khoa.tenkhoa}}
+                                </option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label>Sex</label>
+                          <select class="form-control" name="sex">
+                            <option {% if teacher.gioitinh == "Nam" %} selected {% endif %}>Nam</option>
+                            <option {% if teacher.gioitinh == "Nữ" %} selected {% endif %}>Nữ</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                        {% if messages %}
+                          {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div class="alert alert-success">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card -->
+    
+                </div>
+
+              </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock main_content %}

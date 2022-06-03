@@ -1,0 +1,195 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block page_title %}
+Danh sách điểm danh
+{% endblock page_title %}
+
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                          <div class="col-6">
+                            <h4>Thông tin lớp học phần</h4>
+
+                          </div>
+                          <div class="col-6">
+                            <a class="btn btn-primary" href="{% url 'add_student_attendance' lophocphan_id=classes.id %}" role="button" style="float: right;">+ Add Student</a>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- info row -->
+                        <div class="row invoice-info" style="margin-bottom: 8px;">
+                          <div class="col-sm-4 invoice-col">
+                            Mã học phần: <strong>{{ classes.id }}</strong> <br>
+                            Tên lớp học phần: <strong>{{ classes.ten_lophp }}</strong> <br>
+                            Giảng viên: <strong>{{ teacher.ten_gv }}</strong>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+          
+                        <!-- Table row -->
+                        <div class="row">
+                          <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                              <tr>
+                                <!-- <th>STT</th> -->
+                                <th style="text-align: center;">MSSV</th>
+                                <th style="width: 138px; text-align: center;">Họ và tên</th>
+                                <th style="text-align: center;">Buổi 1</th>
+                                <th style="text-align: center;">Buổi 2</th>
+                                <th style="text-align: center;">Buổi 3</th>
+                                <th style="text-align: center;">Buổi 4</th>
+                                <th style="text-align: center;">Buổi 5</th>
+                                <th style="text-align: center;">Buổi 6</th>
+                                <th style="text-align: center;">Buổi 7</th>
+                                <th style="text-align: center;">Buổi 8</th>
+                                <th style="text-align: center;">Buổi 9</th>
+                                <th style="text-align: center;">Buổi 10</th>
+                                <th style="text-align: center;">Buổi 11</th>
+                                <th style="text-align: center;">Buổi 12</th>
+                                <th style="text-align: center;">Buổi 13</th>
+                                <th style="text-align: center;">Buổi 14</th>
+                                <th style="text-align: center;">Buổi 15</th>
+                                <th style="text-align: center; width: 110px;">Action</th>
+                                <!-- <th style="text-align: center;">Delete</th> -->
+                                
+                              </tr>
+                              </thead>
+                              <tbody>
+                                  {% for at in attendance %}
+                                  <tr>
+                                      <!-- <td style="text-align: center;">{{ forloop.counter }}</td> -->
+                                      <td>{{ at.sinhvien_id }}</td>
+                                      {% for student in students %}
+                                      {% if student.id == at.sinhvien_id %}
+                                        <td style="text-align: center;">{{ student.ten_sv }}</td>
+                                      {% endif %}
+                                      {% endfor %}
+                                      {% if at.buoi_1 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_2 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+                                      
+                                      {% if at.buoi_3 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_4 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_5 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_6 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_7 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_8 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_9 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_10 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_11 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_12 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_13 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_14 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      {% if at.buoi_15 == True %}
+                                      <td style="text-align: center;">C</td>
+                                      {% else %}
+                                      <td style="text-align: center;">V</td>
+                                      {% endif %}
+
+                                      <td>
+                                          <a href="{% url 'edit_attendance' attendance_id=at.id %}?next={{ request.path|urlencode }}" class="btn btn-success"><i class="fas fa-pen"></i></a>
+                                          <a href="{% url 'remove_student_attendance' attendance_id=at.id %}?next={{ request.path|urlencode }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>                                 
+                                        </td>
+                                      <!-- <td>
+                                        <a href="{% url 'remove_student_attendance' attendance_id=at.id %}?next={{ request.path|urlencode }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                      </td> -->
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                            </table>
+                            
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <div class="row">
+                          <div class="col-12">
+                              <a href="{% url 'export_excel' lophocphan_id=classes.id %}" class="btn btn-primary float-right">
+                                <i class="fas fa-download" style="margin-right: 2px;"></i> Export Excel
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock main_content %}

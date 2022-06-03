@@ -1,0 +1,75 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block page_title %}
+Thêm sinh viên
+
+{% endblock page_title %}
+{% block main_content %}
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">{{ classes.ten_lophp }} ({{ classes.get_id_class }})</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" action="/add_student_attendance_save" method="post">
+                        {% csrf_token %}
+                      <div class="card-body">
+                    
+                        <div class="form-group">
+                            <label>Student</label>
+                            <select name="student_id" class="form-control">
+                              {% for student in students %}
+                                <option value="{{student.id}}">{{student.ten_sv}}</option>
+                              {% endfor %}
+                            </select>
+                            <input type="hidden" name="lophocphan_id" value="{{ classes.id }}">
+                        </div>
+
+                        <div class="form-group">
+                        {% if messages %}
+                          {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div class="alert alert-success">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Add</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card -->
+    
+                </div>
+
+              </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock main_content %}

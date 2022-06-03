@@ -1,0 +1,51 @@
+{% load static %}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="" class="brand-link">
+      <img src="{% static "dist/img/dutlogo.jpg" %}" alt="DUT Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">DUT Attendance</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/user9-128x128.jpg" %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ user.username }}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            {% url 'view_classes' as view_classes %}
+            {% url 'view_attendance' classes_id=id as view_attendance %}
+            <a href="{{ view_classes }}" class="nav-link {% if request.path == view_classes %} active {% endif %}
+            {% if request.path == view_attendance %} active {% endif %}">
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>
+                Lớp học phần
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            {% url 'view_attendance' as view_attendance %}
+            <a href="{{ view_attendance }}" class="nav-link {% if request.path == view_attendance %} active {% endif %}">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                Xem danh sách điểm danh
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

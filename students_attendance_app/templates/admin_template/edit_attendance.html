@@ -1,0 +1,223 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block page_title %}
+Cập nhật thông tin điểm danh
+{% endblock page_title %}
+
+{% block main_content %}
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Thông tin chi tiết</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" action="/edit_attendance_save" method="post">
+                        {% csrf_token %}
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-6">
+                                <div class="form-group">
+                                    <label>Mã học phần</label>
+                                    <input type="text" class="form-control" name="lophocphan_id" value="{{ student_at.lophocphan_id }}" readonly>
+                                    <input type="hidden" name="id" value="{{ student_at.id }}">
+                                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                      <label>Tên lớp học phần</label>
+                                      {% for class in classes %}
+                                          {% if class.id == student_at.lophocphan_id %}
+                                              <input type="text" class="form-control" name="tenlophocphan" value="{{ class.ten_lophp }}" readonly>
+                                          {% endif %}
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="form-group">
+                                    <label>MSSV</label>
+                                    <input type="text" class="form-control" name="student_id" value="{{ student_at.sinhvien_id }}" readonly>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Tên sinh viên</label>
+                                    {% for student in students %}
+                                        {% if student.id == student_at.sinhvien_id %}
+                                            <input type="text" class="form-control" name="student_name" value="{{ student.ten_sv }}" readonly>
+                                        {% endif %}
+                                    {% endfor %}
+                                  
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="form-group">
+                                    <label>Buổi 1</label>
+                                    <select class="form-control" name="buoi_1">
+                                      <option {% if student_at.buoi_1 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_1 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                  </div>
+          
+                                  <div class="form-group">
+                                      <label>Buổi 2</label>
+                                      <select class="form-control" name="buoi_2">
+                                        <option {% if student_at.buoi_2 == True %} selected {% endif %} value="True">Có mặt</option>
+                                        <option {% if student_at.buoi_2 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                      </select>
+                                  </div>
+          
+                                  <div class="form-group">
+                                      <label>Buổi 3</label>
+                                      <select class="form-control" name="buoi_3">
+                                        <option {% if student_at.buoi_3 == True %} selected {% endif %} value="True">Có mặt</option>
+                                        <option {% if student_at.buoi_3 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                      </select>
+                                  </div>
+          
+                                  <div class="form-group">
+                                      <label>Buổi 4</label>
+                                      <select class="form-control" name="buoi_4">
+                                        <option {% if student_at.buoi_4 == True %} selected {% endif %} value="True">Có mặt</option>
+                                        <option {% if student_at.buoi_4 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                      </select>
+                                  </div>
+          
+                                  <div class="form-group">
+                                      <label>Buổi 5</label>
+                                      <select class="form-control" name="buoi_5">
+                                        <option {% if student_at.buoi_5 == True %} selected {% endif %} value="True">Có mặt</option>
+                                        <option {% if student_at.buoi_5 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="form-group">
+                                    <label>Buổi 6</label>
+                                    <select class="form-control" name="buoi_6">
+                                      <option {% if student_at.buoi_6 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_6 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 7</label>
+                                    <select class="form-control" name="buoi_7">
+                                      <option {% if student_at.buoi_7 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_7 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 8</label>
+                                    <select class="form-control" name="buoi_8">
+                                      <option {% if student_at.buoi_8 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_8 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 9</label>
+                                    <select class="form-control" name="buoi_9">
+                                      <option {% if student_at.buoi_9 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_9 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 10</label>
+                                    <select class="form-control" name="buoi_10">
+                                      <option {% if student_at.buoi_10 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_10 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="form-group">
+                                    <label>Buổi 11</label>
+                                    <select class="form-control" name="buoi_11">
+                                      <option {% if student_at.buoi_11 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_11 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 12</label>
+                                    <select class="form-control" name="buoi_12">
+                                      <option {% if student_at.buoi_12 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_12 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 13</label>
+                                    <select class="form-control" name="buoi_13">
+                                      <option {% if student_at.buoi_13 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_13 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 14</label>
+                                    <select class="form-control" name="buoi_14">
+                                      <option {% if student_at.buoi_14 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_14 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Buổi 15</label>
+                                    <select class="form-control" name="buoi_15">
+                                      <option {% if student_at.buoi_15 == True %} selected {% endif %} value="True">Có mặt</option>
+                                      <option {% if student_at.buoi_15 == False %} selected {% endif %} value="False">Vắng mặt</option>
+                                    </select>
+                                </div>
+                              </div>
+                          </div>
+
+                        <div class="form-group">
+                        {% if messages %}
+                          {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                            {% if message.tags == 'success' %}
+                            <div class="alert alert-success">
+                              {{ message }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card -->
+    
+                </div>
+
+              </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+{% endblock main_content %}

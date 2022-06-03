@@ -76,3 +76,10 @@ def edit_attendance_teacher_save(request):
             messages.add_message(request, messages.ERROR, 'Cập nhật thông tin thất bại')
             return HttpResponseRedirect(reverse('edit_attendance_teacher', kwargs={'attendance_id': id}))
 
+def view_student_info(request, classes_id):
+    context = {
+        'list_student_dd': DiemDanh.objects.filter(lophocphan_id=classes_id).values_list('sinhvien_id', flat=True),
+        'students': SinhVien.objects.all(),
+        'class': LopHocPhan.objects.get(id=classes_id)
+    }
+    return render(request, 'teacher_template/view_student_info.html', context)

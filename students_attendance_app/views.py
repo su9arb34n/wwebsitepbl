@@ -11,13 +11,6 @@ import datetime
 import xlwt
 import numpy as np
 # Create your views here.
-def search_student(request):
-    if request.method != 'GET':
-        return HttpResponse("<h2>Method Not Allowed</h2>")
-    else:
-        if request.user.user_type == "1":
-            return render(request, 'admin_search_student.html')
-
 
 def showLogin(request):
     return render(request, 'login.html')

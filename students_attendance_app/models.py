@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import os
 
+
 # Create your models here.
 class CustomUser(AbstractUser):
     user_type_data = ((1, 'Admin'), (2, 'Teacher'))

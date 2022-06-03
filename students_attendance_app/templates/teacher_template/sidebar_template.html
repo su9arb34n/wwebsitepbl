@@ -12,37 +12,106 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{% static "dist/img/user9-128x128.jpg" %}" class="img-circle elevation-2" alt="User Image">
+          <img src="{% static "dist/img/teacher_avt.jpg" %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ user.username }}</a>
+          <a href="#" class="d-block">
+            {{ user.first_name }} {{ user.last_name }}
+          </a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
+          <li class="nav-item has-treeview">
             {% url 'view_classes' as view_classes %}
             {% url 'view_attendance' classes_id=id as view_attendance %}
             <a href="{{ view_classes }}" class="nav-link {% if request.path == view_classes %} active {% endif %}
             {% if request.path == view_attendance %} active {% endif %}">
-              <i class="nav-icon fas fa-chalkboard"></i>
+            <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Lớp học phần
+                Danh sách điểm danh
               </p>
+              <i class="right fas fa-angle-left"></i>
             </a>
+
+            <ul class="nav nav-treeview" style="display: none;">
+              {% for id_subject in list_id_subjects %}
+                {% for subject in list_subjects %}
+                  {% if subject.id == id_subject %}
+                  <ul class="nav nav-treeview" style="display: block;">
+                    <li class="nav-item has-treeview">
+                    <a href="" class="nav-link">
+                      <i class="nav-icon fas fa-book"></i>
+                      <p>
+                        {{ subject.ten_mon }}
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      {% for classes in list_classes %}
+                        {% if classes.mon_id == id_subject %}
+                        <li class="nav-item">
+                          {% url 'view_attendance_teacher' classes_id=classes.id as view_attendance_teacher %}
+                          <a href="{{ view_attendance_teacher }}" class="nav-link {% if request.path == view_attendance %} active {% endif %}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{ classes.get_id_class }}</p>
+                          </a>
+                        </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                    </li>
+                  </ul>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+              </li>
+            </ul>
           </li>
 
-          <li class="nav-item">
-            {% url 'view_attendance' as view_attendance %}
-            <a href="{{ view_attendance }}" class="nav-link {% if request.path == view_attendance %} active {% endif %}">
-              <i class="nav-icon fas fa-calendar-alt"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-file-alt"></i>
               <p>
-                Xem danh sách điểm danh
+                Thông tin lớp học
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview" style="display: none;">
+                {% for id in list_id_group %}
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-layer-group nav-icon"></i>
+                    <p>
+                      {{ id }}
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    {% for classes in list_classes %}
+                      {% if classes.get_id_class == id %}
+                        {% for subject in list_subjects %}
+                          {% if subject.id == classes.mon_id %}
+                            <li class="nav-item">
+                              {% url 'view_student_info' classes_id=classes.id as view_student_info %}
+                              <a href="{{ view_student_info }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ subject.ten_mon }}</p>
+                              </a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% endfor %}
+            
+            </ul>
           </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

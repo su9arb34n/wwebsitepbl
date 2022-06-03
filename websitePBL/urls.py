@@ -20,9 +20,12 @@ from django.conf.urls.static import static
 
 from websitePBL import settings
 from students_attendance_app import AdminView, views, TeacherView
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', views.showLogin, name="show_login"),
     path('get_user_details/', views.GetUserDetails),
     path('logout_user/', views.logout_user, name="logout"),
@@ -74,4 +77,5 @@ urlpatterns = [
     path('view_classes', TeacherView.view_classes, name="view_classes"),
     path('edit_attendance_teacher/<str:attendance_id>', TeacherView.edit_attendance_teacher, name="edit_attendance_teacher"),
     path('edit_attendance_teacher_save', TeacherView.edit_attendance_teacher_save, name="edit_attendance_teacher_save"),
+    path('view_student_info/<str:classes_id>', TeacherView.view_student_info, name="view_student_info"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

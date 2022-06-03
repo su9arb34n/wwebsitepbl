@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-8wdkfo9($w_d!f5a@)x)c=ng9*5gn#sc&gu@h=8e!(=7&0*ak9
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*'
+    '05cf-116-98-48-125.ap.ngrok.io', '127.0.0.1', 'localhost',
 ]
 
 # Application definition
@@ -70,6 +70,7 @@ TEMPLATES = [
 
                 # mysapp
                 "students_attendance_app.processor.khoa_context",
+                "students_attendance_app.processor.get_list_subjects_teacher",
             ],
         },
     },
@@ -85,12 +86,14 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
+
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'student_attendance_system',
         # 'USER': 'student_attendance_system',
         # 'PASSWORD': 'student_attendance_password',
         # 'HOST': 'localhost',
         # 'PORT': '3306',
+
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'student_attendance_system',
         'USER': 'attendancesys',
